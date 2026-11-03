@@ -1,19 +1,37 @@
 # Oil Field Data Analysis (SQL + Python)
 
-A data analysis project focusing on petroleum engineering datasets using SQLite and Python.
+A comprehensive data analysis project for the petroleum industry, demonstrating the integration of SQL databases with Python for data processing, analysis, and visualization.
 
-## Features
-- Database Design: Created a relational SQLite database (`oil_field_project.db`) with wells and production tables.
-- Advanced SQL: Implemented queries using JOIN, GROUP BY, CTE, and Window Functions (for ranking).
-- Python Integration: Connected to the database using sqlite3 for automated data extraction and secure parameterized queries.
+## 🚀 Features
+- Database Management: Designed a relational SQLite database (oil_field_project.db) with project_wells and project_production tables.
+- Data Processing: Used Pandas to merge datasets, handle missing values, and calculate statistical summaries.
+- Data Visualization: Created 5 distinct analytical plots using Matplotlib to extract actionable insights from the oil field data.
 
-## Files
-- queries.sql: Contains all the analytical SQL queries used for reporting.
-- analysis.py: Python script to connect, query, and output data.
-- oil_field_project.db: The SQLite database file.
+## 📊 Generated Visualizations
 
-## How to Run
-1. Ensure Python is installed.
-2. Run the script:
-```bash
-python analysis.py
+### 1. Average Oil Rate per Well
+Identifies the top-performing wells (e.g., Well-Delta) and underperforming assets.
+![Average Oil Rate](plot1_avg_oil_rate.png)
+
+### 2. Production Trend for Well-Alpha
+Time-series analysis showing the daily production fluctuations.
+![Production Trend](plot2_well_alpha_trend.png)
+
+### 3. Distribution of Oil Rate
+Histogram showing the frequency of production rates across all records.
+![Distribution](plot3_oil_rate_distribution.png)
+
+### 4. Relationship between Pressure and Oil Rate
+Scatter plot demonstrating the strong positive correlation between pressure and production.
+![Pressure vs Oil Rate](plot4_pressure_vs_oil_rate.png)
+
+### 5. Box Plot of Oil Rate
+Box plot identifying the median production and detecting outliers (e.g., wells under maintenance).
+![Box Plot](plot5_oil_rate_boxplot.png)
+
+## ⚙️ How to Run
+1. Clone this repository.
+2. Ensure you have Python installed.
+3. Install the required libraries:
+   `bash
+   pip install pandas matplotlib

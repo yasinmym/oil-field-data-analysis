@@ -21,20 +21,75 @@ df_merged['oil_rate'] = df_merged['oil_rate'].fillna(0)
 # 5. Close the database connection
 connection.close()
 
-# 6. Calculate average oil rate per well
-avg_oil_rate = df_merged.groupby('well_name')['oil_rate'].mean()
+print("Data loaded and merged successfully.\n")
 
-# 7. Create the bar chart
+# --- 6. Statistical Summary ---
+print("--- Statistical Summary ---")
+print(df_merged[['depth_m', 'pressure_bar', 'oil_rate']].describe())
+print("\n")
+
+# --- 7. Data Visualization (Saving plots as images) ---
+
+# Plot 1: Bar Chart (Average Oil Rate per Well)
+avg_oil_rate = df_merged.groupby('well_name')['oil_rate'].mean()
 plt.figure(figsize=(8, 5))
 avg_oil_rate.plot(kind='bar', color='skyblue')
-
-# 8. Set labels and title
 plt.title('Average Oil Rate per Well')
 plt.xlabel('Well Name')
 plt.ylabel('Average Oil Rate (bbl/day)')
-
-# plt.xticks(rotation=45) # Commented out due to compatibility issue with Python 3.14
-
-# 9. Adjust layout and display the plot
 plt.tight_layout()
-plt.show()
+plt.savefig('plot1_avg_oil_rate.png')
+plt.close()
+print("Saved: plot1_avg_oil_rate.png")
+
+# Plot 2: Line Chart (Production Trend for Well-Alpha)
+df_merged['production_date'] = pd.to_datetime(df_merged['production_date'])
+well_alpha_data = df_merged[df_merged['well_name'] == 'Well-Alpha'].sort_values('production_date')
+plt.figure(figsize=(8, 5))
+plt.plot(well_alpha_data['production_date'], well_alpha_data['oil_rate'], marker='o', color='green', linestyle='-')
+plt.title('Oil Production Trend for Well-Alpha')
+plt.xlabel('Date')
+plt.ylabel('Oil Rate (bbl/day)')
+plt.grid(True)
+plt.tight_layout()
+plt.savefig('plot2_well_alpha_trend.png')
+plt.close()
+print("Saved: plot2_well_alpha_trend.png")
+
+# Plot 3: Histogram (Distribution of Oil Rate)
+plt.figure(figsize=(8, 5))
+plt.hist(df_merged['oil_rate'], bins=5, color='purple', edgecolor='black')
+plt.title('Distribution of Oil Rate')
+plt.xlabel('Oil Rate (bbl/day)')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.savefig('plot3_oil_rate_distribution.png')
+plt.close()
+print("Saved: plot3_oil_rate_distribution.png")
+
+# Plot 4: Scatter Plot (Pressure vs Oil Rate)
+plt.figure(figsize=(8, 5))
+plt.scatter(df_merged['pressure_bar'], df_merged['oil_rate'], color='red', alpha=0.7)
+plt.title('Relationship between Pressure and Oil Rate')
+plt.xlabel('Pressure (bar)')
+plt.ylabel('Oil Rate (bbl/day)')
+plt.grid(True)
+plt.tight_layout()
+plt.savefig('plot4_pressure_vs_oil_rate.png')
+plt.close()
+print("Saved: plot4_pressure_vs_oil_rate.png")
+
+# Plot 5: Box Plot (Oil Rate)
+plt.figure(figsize=(6, 5))
+plt.boxplot(df_merged['oil_rate'], patch_artist=True, boxprops=dict(facecolor='lightblue'))
+plt.title('Box Plot of Oil Rate')
+plt.ylabel('Oil Rate (bbl/day)')
+plt.tight_layout()
+plt.savefig('plot5_oil_rate_boxplot.png')
+plt.close()
+print("Saved: plot5_oil_rate_boxplot.png\n")
+
+# --- 8. Correlation Matrix ---
+print("--- Correlation Matrix ---")
+correlation_matrix = df_merged[['depth_m', 'pressure_bar', 'oil_rate']].corr()
+print(correlation_matrix) 
