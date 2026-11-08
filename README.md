@@ -7,6 +7,12 @@ A comprehensive data analysis project for the petroleum industry, demonstrating 
 - Data Processing: Used Pandas to merge datasets, handle missing values, and calculate statistical summaries.
 - Data Visualization: Created 5 distinct analytical plots using Matplotlib to extract actionable insights from the oil field data.
 
+## 📈 Statistical Insights
+- Mean Oil Rate: 1250.00 bbl/day
+- Median Oil Rate: 1250.00 bbl/day
+- Standard Deviation: 548.86 bbl/day
+- Hypothesis Test (North vs South): P-value of 0.8150 (No significant difference between fields)
+
 ## 📊 Generated Visualizations
 
 ### 1. Average Oil Rate per Well
